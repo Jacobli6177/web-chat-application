@@ -14,6 +14,20 @@ export const signup = async (req, res) => {
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password.salt);
+
+        const newUser = newUser({
+            fullName: fullName,
+            email: email,
+            password: password,
+        })
+
+        if (newUser) {
+
+        } else {
+            res.status(400).json({ message: "Invalid  user data"});
+        }
+
+
     } catch (error) {
 
     }
