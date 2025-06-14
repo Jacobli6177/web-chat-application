@@ -43,3 +43,22 @@ export const signup = async (req, res) => {
         res.status(500).json({ message: "Internal Server Error" });
     }
 };
+
+export const login = async (req, res) => {
+    const { email, password } = req.body
+    try {
+        const user = await User.findOne({email})
+
+        if (!user) {
+            return res.status(400).json({ message: "Invalid credentials"})
+        }
+
+        await bcrypt.compare(password, user.password)
+    }catch(error) {
+
+    }
+};
+
+export const logout = (req, res) => {
+    res.send("logout route")
+}
