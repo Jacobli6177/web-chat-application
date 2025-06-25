@@ -57,4 +57,19 @@ export const useAuthStore = create((set, get) => ({
     // Add your socket.io connect logic here if needed
     console.log("connectSocket called");
   },
+
+  logout: async () => {
+    try {
+      await axiosInstance.post("/auth/logout");
+      set({ authUser: null });
+      toast.success("Logged out successfully");
+      get().disconnectSocket();
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  },
+
+  updateProfile: async (data) => {
+    
+  }
 }));
